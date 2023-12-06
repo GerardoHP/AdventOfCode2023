@@ -1,6 +1,15 @@
 package Days
 
+import (
+	"github.com/GerardoHP/AdventOfCode2023/Common"
+)
+
+var (
+	t = Common.NewTrieNode()
+)
+
 func Day1(codes []string) int {
+	prepTrie()
 	result := 0
 	for _, v := range codes {
 		result += decode(v)
@@ -9,15 +18,65 @@ func Day1(codes []string) int {
 	return result
 }
 
+func prepTrie() {
+	t.Insert("one")
+	t.Insert("two")
+	t.Insert("three")
+	t.Insert("four")
+	t.Insert("five")
+	t.Insert("six")
+	t.Insert("seven")
+	t.Insert("eight")
+	t.Insert("nine")
+	t.Insert("zero")
+	t.Insert("1")
+	t.Insert("2")
+	t.Insert("3")
+	t.Insert("4")
+	t.Insert("5")
+	t.Insert("6")
+	t.Insert("7")
+	t.Insert("8")
+	t.Insert("9")
+	t.Insert("0")
+}
+
 func decode(code string) int {
 	a := make([]int, 0)
-	for _, v := range code {
-		if isInt, n := runeToInt(v); isInt {
+	start := 0
+	end := 0
+
+	for start < len(code) {
+		subCode := code[start : end+1]
+		if found, n := t.Search(subCode); found {
+			a = append(a, n)
+			start = len(code)
+			end = len(code)
+			break
+		}
+
+		end++
+		if end == len(code) {
+			end = start + 1
+			start++
+		}
+	}
+
+	for start > 0 {
+		subCode := code[end-1 : start]
+		if found, n := t.Search(subCode); found {
 			if len(a) < 2 {
 				a = append(a, n)
-			} else {
-				a[1] = n
+				start = 0
+				end = 0
+				break
 			}
+		}
+
+		end--
+		if end == 0 {
+			end = start - 1
+			start--
 		}
 	}
 
@@ -30,32 +89,4 @@ func decode(code string) int {
 	}
 
 	return a[0]*10 + a[1]
-}
-
-func runeToInt(r rune) (bool, int) {
-	str := string(r)
-	switch str {
-	case "0":
-		return true, 0
-	case "1":
-		return true, 1
-	case "2":
-		return true, 2
-	case "3":
-		return true, 3
-	case "4":
-		return true, 4
-	case "5":
-		return true, 5
-	case "6":
-		return true, 6
-	case "7":
-		return true, 7
-	case "8":
-		return true, 8
-	case "9":
-		return true, 9
-	default:
-		return false, -1
-	}
 }

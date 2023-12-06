@@ -50,35 +50,25 @@ func (tn *TrieNode) Search(str string) (bool, int) {
 
 func stringToInt(str string) (bool, int) {
 	switch str {
-	case "0":
-	case "zero":
+	case "0", "zero":
 		return true, 0
-	case "1":
-	case "one":
+	case "1", "one":
 		return true, 1
-	case "2":
-	case "two":
+	case "2", "two":
 		return true, 2
-	case "3":
-	case "three":
+	case "3", "three":
 		return true, 3
-	case "4":
-	case "four":
+	case "4", "four":
 		return true, 4
-	case "5":
-	case "five":
+	case "5", "five":
 		return true, 5
-	case "6":
-	case "six":
+	case "6", "six":
 		return true, 6
-	case "7":
-	case "seven":
+	case "7", "seven":
 		return true, 7
-	case "8":
-	case "eight":
+	case "8", "eight":
 		return true, 8
-	case "9":
-	case "nine":
+	case "9", "nine":
 		return true, 9
 	}
 
