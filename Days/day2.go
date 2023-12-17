@@ -2,7 +2,6 @@ package Days
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -22,6 +21,7 @@ type game struct {
 	isPossible bool
 	tosses     []toss
 	original   string
+	potency    int
 }
 
 type toss struct {
@@ -39,11 +39,8 @@ func Day2(gamesStr []string) int {
 
 	total := 0
 	for _, v := range games {
-		if v.Validate() {
-			total += v.number
-		} else {
-			fmt.Println(v.original)
-		}
+		v.Validate()
+		total += v.potency
 	}
 
 	return total
@@ -51,11 +48,24 @@ func Day2(gamesStr []string) int {
 
 func (game *game) Validate() bool {
 	valid := true
+	minRed, minGreen, minBlue := 1, 1, 1
 	for _, v := range game.tosses {
 		valid = valid && (v.red <= maxRed && v.green <= maxGreen && v.blue <= maxBlue)
+		if v.red > minRed {
+			minRed = v.red
+		}
+
+		if v.green > minGreen {
+			minGreen = v.green
+		}
+
+		if v.blue > minBlue {
+			minBlue = v.blue
+		}
 	}
 
 	game.isPossible = valid
+	game.potency = minRed * minGreen * minBlue
 	return game.isPossible
 }
 
