@@ -1,6 +1,9 @@
-package Days
+package Days_test
 
-import "testing"
+import (
+	"github.com/GerardoHP/AdventOfCode2023/Days"
+	"testing"
+)
 
 func TestDay1(t *testing.T) {
 	// Arrange
@@ -13,7 +16,7 @@ func TestDay1(t *testing.T) {
 	expected := 142
 
 	// Act
-	result := Day1(codes)
+	result := Days.Day1(codes)
 
 	// Assert
 	if result != expected {
@@ -35,7 +38,7 @@ func TestDay1_part2(t *testing.T) {
 	expected := 281
 
 	// Act
-	result := Day1(codes)
+	result := Days.Day1(codes)
 
 	// Assert
 	if result != expected {
