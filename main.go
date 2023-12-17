@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	err, strs := Common.ReadLines("inputs/day2_part1.txt")
+	err, strs := Common.ReadLines("inputs/day2_part2.txt")
 	if err != nil {
 		fmt.Println(err)
 		return
